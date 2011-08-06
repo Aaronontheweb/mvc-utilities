@@ -45,8 +45,7 @@ h4. Lower-case Routes
 Courtesy of "Nick Bernardi":http://coderjournal.com/2008/03/force-mvc-route-url-lowercase/, we have the @LowerCaseRoute@ class in MVC.Utilities.
 
 Here's an example of how to use it inside of Global.asax:
-<pre>
-routes.Add("default", new LowerCaseRoute("{controller}/{action}/{id}",
+<pre>routes.Add("default", new LowerCaseRoute("{controller}/{action}/{id}",
 					new RouteValueDictionary(
 					new { controller = "Home", action = "Index", id = UrlParameter.Optional }),
 					new MvcRouteHandler()));
