@@ -1,0 +1,79 @@
+h2. MVC.Utilities
+
+This is a batch of utility classes for making it easier to work with "ASP.NET MVC":http://www.asp.net/mvc.
+
+h3. Authentication
+
+Create a new @FormsAuthenticationService@ instance thusly, or inject it via an IoC container:
+<pre>var authenticator = new FormsAuthenticationService();</pre>
+
+You can sign-in users and set a persistent ASP.NET Forms authentication cookie:
+<pre>authenticator.SignIn(UserName, true);</pre>
+
+You can sign-out users again, which clears the authentication cookie:
+<pre>authenticator.SignOut();</pre>
+
+h3. Caching
+
+MVC.Utilities supports a couple of different caching options out of the box, all of which derive from the @ICacheService@ interface and @CacheServiceBase@ abstract base class.
+
+The @RuntimeCacheService@ uses the System.Runtime.Caching namespace to take advantage of built-in object caching - this is cache is simply an abstracted, more testable version of 
+ASP.NET's built-in object caching.
+
+Create a new @RuntimeCacheService@ instance - specify the type of ObjectCache you want to use and a default expiration window:
+<pre>var cacheService = new RuntimeCacheProvider(MemoryCache.Default, new TimeSpan(0, 0, 20));</pre>
+
+Use the @Save@, @Exists@, @Get@, and @Delete@ methods to act on objects in dictionary maintained by the cache. These commands will all work as expected for the @AppFabricCacheService@ as well for
+those of you using "Windows Azure":http://www.microsoft.com/windowsazure/
+
+h3. Encryption
+
+MVC.Utilities has two out-of-the-box encrpytion providers which both derive from the @ICryptoService@ interface: @HMACSHA1Service@ and @BCryptService@.
+
+To hash a password, simply call the @HashPassword@ method:
+<pre>var hash = _crypto.HashPassword(originalPass);</pre>
+
+To check to see if two passwords are equivalent, use the @CheckPassword@ method:
+<pre>var areEquivalent = _crypto.CheckPassword(originalPass, hash);</pre>
+
+h3. Routing
+
+MVC.Utilities contains a set of helper classes designed to tackle some specific routing challenges in ASP.NET MVC, particularly where search engine optimization is concerned.
+
+h4. Lower-case Routes
+
+Courtesy of "Nick Bernardi":http://coderjournal.com/2008/03/force-mvc-route-url-lowercase/, we have the @LowerCaseRoute@ class in MVC.Utilities.
+
+Here's an example of how to use it inside of Global.asax:
+<pre>
+routes.Add("default", new LowerCaseRoute("{controller}/{action}/{id}",
+					new RouteValueDictionary(
+					new { controller = "Home", action = "Index", id = UrlParameter.Optional }),
+					new MvcRouteHandler()));
+</pre>
+
+h4. Search Engine-Friendly Slugs
+
+For sites that serve user-generated content, some developers make it a priority to give those pages SEO-friendly URLs. 
+
+The @SlugHelper@ utility class helps make this easy:
+<pre>//slug will look like 'complex-looking-name' (without quotes obviously)
+var slug = SlugHelper.GenerateSlug("Complex Looking Name!!!!");</pre>
+
+h3. Security
+
+Currently there's only one additional security-related class in MVC.Utilities.Security: the @UploadedImageValidator@.
+
+The @UploadedImageValidator@ verifies that a user-uploaded image is an image in JPEG, GIF, or PNG format and (optionally) is under a specified file size.
+
+<pre>var imageStream = ImageContainer.AsStream("test.jpeg");
+var isValidImage = UploadedImageValidator.FileIsWebFriendlyImage(Stream stream);</pre>
+
+h3. UI and Display Helpers
+
+The @DateTimeLocalizationHelper@ provides a ghetto, server-side method for localizing times by simply displaying all times as relative times ala "Hacker News":http://news.ycombinator.com/.
+
+For example, 3/3/2011 2:11 will read as "2 hours ago" if you're looking at the content at 3/3/2011 4:14.
+
+Simply call the @ToRelativeDateTime@ method from your standard HTML helper class.
+<pre><span class="ideaPostDate">@Html.ToRelativeDateTime(Model.DatePosted)</span></pre>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+  <configSections>
+    <!-- Append below entry to configSections. Do not overwrite the full section. -->
+    <section name="dataCacheClients" type="Microsoft.ApplicationServer.Caching.DataCacheClientsSection, Microsoft.ApplicationServer.Caching.Core"
+             allowLocation="true" allowDefinition="Everywhere"/>
+  </configSections>
+
+  <!-- Cache exposes two endpoints: one simple and other ssl endpoint. Choose the appropriate endpoint depending on your security needs. -->
+  <dataCacheClients>
+
+    <dataCacheClient name="default">
+      <hosts>
+        <host name="YOURCACHENAME.cache.windows.net" cachePort="22233" />
+      </hosts>
+
+      <securityProperties mode="Message">
+        <messageSecurity
+          authorizationInfo="YOURCACHETOKEN">
+        </messageSecurity>
+      </securityProperties>
+    </dataCacheClient>
+
+    <dataCacheClient name="SslEndpoint">
+      <hosts>
+        <host name="YOURCACHENAME.cache.windows.net" cachePort="22243" />
+      </hosts>
+
+      <securityProperties mode="Message" sslEnabled="true">
+        <messageSecurity
+          authorizationInfo="YOURCACHETOKEN">
+        </messageSecurity>
+      </securityProperties>
+    </dataCacheClient>
+
+  </dataCacheClients>
+
+</configuration>
