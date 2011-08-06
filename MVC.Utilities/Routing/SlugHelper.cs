@@ -16,12 +16,16 @@ namespace MVC.Utilities.Routing
         public static string GenerateSlug(string name)
         {
             var sb = new StringBuilder();
-            foreach (var c in name.Where(c => (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == ' '))
+            string lower = name.ToLower();
+            foreach (char c in lower)
             {
-                sb.Append(c);
+                if (c == ' ' || c == '.' || c == '=' || c == '-')
+                    sb.Append('-');
+                else if ((c <= 'z' && c >= 'a') || (c <= '9' && c >= '0'))
+                    sb.Append(c);
             }
 
-            return sb.ToString().Replace(" ", "-").ToLower();
+            return sb.ToString().Trim('-');
         }
     }
 }
