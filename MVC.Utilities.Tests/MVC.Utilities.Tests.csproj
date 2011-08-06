@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Encryption\SHA1ServiceTests.cs" />
     <Compile Include="TestData\TestDataHelper.cs" />
+    <Compile Include="UI\RelativeDateTimeHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">

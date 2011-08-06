@@ -17,14 +17,12 @@ h3. Caching
 
 MVC.Utilities supports a couple of different caching options out of the box, all of which derive from the @ICacheService@ interface and @CacheServiceBase@ abstract base class.
 
-The @RuntimeCacheService@ uses the System.Runtime.Caching namespace to take advantage of built-in object caching - this is cache is simply an abstracted, more testable version of 
-ASP.NET's built-in object caching.
+The @RuntimeCacheService@ uses the System.Runtime.Caching namespace to take advantage of built-in object caching - this is cache is simply an abstracted, more testable version of ASP.NET's built-in object caching.
 
 Create a new @RuntimeCacheService@ instance - specify the type of ObjectCache you want to use and a default expiration window:
 <pre>var cacheService = new RuntimeCacheProvider(MemoryCache.Default, new TimeSpan(0, 0, 20));</pre>
 
-Use the @Save@, @Exists@, @Get@, and @Delete@ methods to act on objects in dictionary maintained by the cache. These commands will all work as expected for the @AppFabricCacheService@ as well for
-those of you using "Windows Azure":http://www.microsoft.com/windowsazure/
+Use the @Save@, @Exists@, @Get@, and @Delete@ methods to act on objects in dictionary maintained by the cache. These commands will all work as expected for the @AppFabricCacheService@ as well for those of you using "Windows Azure":http://www.microsoft.com/windowsazure/
 
 h3. Encryption
 
