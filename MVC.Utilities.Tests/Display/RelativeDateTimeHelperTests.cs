@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MVC.Utilities.UI;
+using MVC.Utilities.Display;
 using NUnit.Framework;
 
-namespace MVC.Utilities.Tests.UI
+namespace MVC.Utilities.Tests.Display
 {
     [TestFixture(Description = "Tests as to whether or not our datetime helper extension method actually works")]
     public class RelativeDateTimeTests

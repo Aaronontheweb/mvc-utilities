@@ -74,7 +74,7 @@
     <Compile Include="Routing\LowerCaseRoute.cs" />
     <Compile Include="Routing\SlugHelper.cs" />
     <Compile Include="Security\UploadedImageValidator.cs" />
-    <Compile Include="UI\DateTimeLocalizationHelper.cs" />
+    <Compile Include="Display\DateTimeLocalizationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

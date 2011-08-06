@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 
-namespace MVC.Utilities.UI
+namespace MVC.Utilities.Display
 {
     /// <summary>
     /// Static helper class used to represent times as relative times (ghetto localization 4tw)
