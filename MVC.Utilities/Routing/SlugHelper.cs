@@ -27,5 +27,15 @@ namespace MVC.Utilities.Routing
 
             return sb.ToString().Trim('-');
         }
+
+        /// <summary>
+        /// Transforms the string into a URL-friendly slug
+        /// </summary>
+        /// <param name="name">The original string</param>
+        /// <returns>A string containing a url-friendly slug</returns>
+        public static string ToSlug(this string name)
+        {
+            return GenerateSlug(name);
+        }
     }
 }
