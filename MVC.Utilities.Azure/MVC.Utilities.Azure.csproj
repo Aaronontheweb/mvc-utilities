@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevOne.Security.Cryptography.BCrypt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ApplicationServer.Caching.Client, Version=101.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WindowsAzure.Caching.1.1.0.0\lib\Microsoft.ApplicationServer.Caching.Client.dll</HintPath>
@@ -50,6 +53,9 @@
       <Private>True</Private>
       <HintPath>..\packages\WindowsAzure.Caching.1.1.0.0\lib\Microsoft.WindowsFabric.Data.Common.dll</HintPath>
     </Reference>
+    <Reference Include="MVC.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\mvc-utilities.1.0\lib\net4\MVC.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
@@ -62,12 +68,6 @@
   <ItemGroup>
     <Compile Include="Caching\AppFabricCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">
-      <Project>{3C3E3FD8-F1B0-4122-9CF0-92B05F17BF8A}</Project>
-      <Name>MVC.Utilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />

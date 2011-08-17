@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC1E890B-E08D-4F5A-92F9-0A5FF735CD96}"
 	ProjectSection(SolutionItems) = preProject
 		license.txt = license.txt
+		mvc-utilities-azure.nuspec = mvc-utilities-azure.nuspec
 		mvc-utilities.nuspec = mvc-utilities.nuspec
 		package.cmd = package.cmd
 		README.textile = README.textile
