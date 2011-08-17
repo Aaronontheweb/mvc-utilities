@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/Aaronontheweb/mvc-utilities</projectUrl>
     <licenseUrl>https://github.com/Aaronontheweb/mvc-utilities/blob/master/license.txt</licenseUrl>
     <dependencies>
-      <dependency id="mvc-utilities" version="1.0.0.0" />
+      <dependency id="mvc-utilities" version="1.0.1.0" />
       <dependency id="WindowsAzure.Caching" version="1.1.0.0" />
     </dependencies>
     <tags>MVC ASP.NET MVC3 Cache Hashing Encryption LowercaseRoute Routing AppFabric Azure</tags>
