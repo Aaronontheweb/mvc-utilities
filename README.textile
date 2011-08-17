@@ -74,3 +74,13 @@ For example, 3/3/2011 2:11 will read as "2 hours ago" if you're looking at the c
 
 Simply call the @ToRelativeDateTime@ method from your standard HTML helper class.
 <pre><span class="ideaPostDate">@Html.ToRelativeDateTime(Model.DatePosted)</span></pre>
+
+h3. Install MVC.Utilities via NuGet
+
+If you want to install MVC.Utilities via NuGet, simply type this command into the package manage console in Visual Studio:
+
+<pre>Install-Package mvc-utilities</pre>
+
+If you want access to the Azure-specific helpers in MVC.Utilities, install this package also:
+
+<pre>Install-Package mvc-utilities-azure</pre>
