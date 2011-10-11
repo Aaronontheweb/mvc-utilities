@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.Caching;
 using System.Threading;
@@ -171,6 +172,12 @@ namespace MVC.Utilities.Caching
                         throw; //If the cache isn't available or it's an error we can't handle
                 }
             }
+        }
+
+        public IEnumerable<KeyValuePair<string, object>> GetObjectsInRegion(string region)
+        {
+            var cache = GetCache();
+            return cache.GetObjectsInRegion(region);
         }
 
         protected override void Save(string key, object value, CacheItemPolicy policy)
