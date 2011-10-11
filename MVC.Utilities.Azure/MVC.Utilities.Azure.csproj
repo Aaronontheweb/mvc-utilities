@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\AppFabricCache.cs" />
+    <Compile Include="Caching\AppFabricPessimisticConcurrencyCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -46,7 +46,7 @@ namespace MVC.Utilities.Caching
 
                 if (Exists(key))
                 {
-                    _cache.Put(key, value, expiration);
+                    cache.Put(key, value, expiration);
                 }
                 else
                 {
