@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>mvc-utilities-azure</id>
-    <version>1.00</version>
+    <version>1.10</version>
     <authors>Aaron Stannard</authors>
     <owners>Aaron Stannard</owners>
     <description>Utility classes designed for ASP.NET MVC running on Windows Azure specifically.</description>

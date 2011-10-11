@@ -40,7 +40,7 @@ namespace MVC.Utilities.Caching
         /// <param name="attemptCount">The number of get attempts to make</param>
         /// <param name="waitTime">The number of milliseconds to wait between retry attempts</param>
         /// <returns>The object retrieved from the cache</returns>
-        private static object RetryGet(string key, int attemptCount = 10, int waitTime = 100)
+        private static object RetryGet(string key, int attemptCount = 10, int waitTime = 100, string region = "")
         {
             var cache = GetCache();
             object itemInCache = null;
@@ -49,8 +49,16 @@ namespace MVC.Utilities.Caching
             {
                 try
                 {
-                    //Attempt to get the item from cache again...
-                    itemInCache = cache.Get(key);
+                    if (string.IsNullOrWhiteSpace(region) || string.IsNullOrEmpty(region))
+                    {
+                        //Attempt to get the item from cache again...
+                        itemInCache = cache.Get(key);
+                    }
+                    else
+                    {
+                        itemInCache = cache.Get(key, region);
+                    }
+                    
                 }
                 catch (DataCacheException cacheException)
                 {
@@ -67,7 +75,7 @@ namespace MVC.Utilities.Caching
             return itemInCache;
         }
 
-        private static bool RetryPut(string key, object value, TimeSpan timeout, int attemptCount = 10, int waitTime = 100)
+        private static bool RetryPut(string key, object value, TimeSpan timeout, int attemptCount = 10, int waitTime = 100, string region = "")
         {
             var cache = GetCache();
             object cacheObject = null;
@@ -76,8 +84,16 @@ namespace MVC.Utilities.Caching
             {
                 try
                 {
-                    //Attempt to get the item from cache again...
-                    cacheObject = cache.Put(key, value, timeout);
+                    if(string.IsNullOrWhiteSpace(region) || string.IsNullOrEmpty(region))
+                    {
+                        //Attempt to get the item from cache again...
+                        cacheObject = cache.Put(key, value, timeout);
+                    }
+                    else
+                    {
+                        cacheObject = cache.Put(key, value, timeout,region);
+                    }
+                    
                 }
                 catch (DataCacheException cacheException)
                 {
@@ -93,7 +109,7 @@ namespace MVC.Utilities.Caching
             return true;
         }
 
-        private static bool RetryDelete(string key, int attemptCount = 10, int waitTime = 100)
+        private static bool RetryDelete(string key, int attemptCount = 10, int waitTime = 100, string region = "")
         {
             var cache = GetCache();
             var removeResult = false;
@@ -102,8 +118,16 @@ namespace MVC.Utilities.Caching
             {
                 try
                 {
-                    //Attempt to get the item from cache again...
-                    removeResult = cache.Remove(key);
+
+                    if (string.IsNullOrWhiteSpace(region) || string.IsNullOrEmpty(region))
+                    {
+                        //Attempt to remove the item from cache again...
+                        removeResult = cache.Remove(key);
+                    }
+                    else
+                    {
+                        removeResult = cache.Remove(key, region);
+                    }
                 }
                 catch (DataCacheException cacheException)
                 {
@@ -119,6 +143,35 @@ namespace MVC.Utilities.Caching
         #endregion
 
         #region Overrides of CacheServiceBase
+
+        public void Save(string key, object value, CacheItemPolicy policy, string region)
+        {
+            try
+            {
+                var expiration = policy.SlidingExpiration;
+
+                if (policy.SlidingExpiration == TimeSpan.MinValue)
+                {
+                    expiration = _default_duration;
+                }
+
+                var cache = GetCache();
+
+                cache.Put(key, value, expiration,region);
+            }
+            catch (DataCacheException cacheException)
+            {
+                switch (cacheException.ErrorCode)
+                {
+                    case DataCacheErrorCode.RetryLater:
+                        RetryPut(key, value, _default_duration);
+                        break;
+                    case DataCacheErrorCode.Timeout:
+                    default:
+                        throw; //If the cache isn't available or it's an error we can't handle
+                }
+            }
+        }
 
         protected override void Save(string key, object value, CacheItemPolicy policy)
         {
@@ -142,6 +195,32 @@ namespace MVC.Utilities.Caching
                     case DataCacheErrorCode.RetryLater:
                         RetryPut(key, value, _default_duration);
                         break;
+                    case DataCacheErrorCode.Timeout:
+                    default:
+                        throw; //If the cache isn't available or it's an error we can't handle
+                }
+            }
+        }
+
+        public object Get(string key, string region)
+        {
+            try
+            {
+                var cache = GetCache();
+
+                return cache.Get(key, region);
+            }
+            catch (DataCacheException cacheException)
+            {
+                //So why isn't this switch statement it's own method?
+                //Answer: the naked throw; from the catch block allows
+                //us to preserve the stacktrace from the original error.
+                //A new method wouldn't allow it, although there is probably a way
+                //we can refactor it.
+                switch (cacheException.ErrorCode)
+                {
+                    case DataCacheErrorCode.RetryLater:
+                        return RetryGet(key,10,100,region);
                     case DataCacheErrorCode.Timeout:
                     default:
                         throw; //If the cache isn't available or it's an error we can't handle
@@ -175,6 +254,35 @@ namespace MVC.Utilities.Caching
             }
         }
 
+        public bool Remove(string key, string region)
+        {
+            try
+            {
+                if (!Exists(key, region))
+                {
+                    return false;
+                }
+
+                var cache = GetCache();
+
+                return cache.Remove(key, region);
+            }
+            catch (DataCacheException cacheException)
+            {
+                switch (cacheException.ErrorCode)
+                {
+                    case DataCacheErrorCode.KeyDoesNotExist:
+                    case DataCacheErrorCode.RegionDoesNotExist:
+                        return false; //We weren't able to find the 
+                    case DataCacheErrorCode.RetryLater:
+                        return RetryDelete(key,10,100,region);
+                    case DataCacheErrorCode.Timeout:
+                    default:
+                        throw; //If the cache isn't available or it's an error we can't handle
+                }
+            }
+        }
+
         public override bool Remove(string key)
         {
             try
@@ -197,6 +305,35 @@ namespace MVC.Utilities.Caching
                         return false; //We weren't able to find the 
                     case DataCacheErrorCode.RetryLater:
                         return RetryDelete(key);
+                    case DataCacheErrorCode.Timeout:
+                    default:
+                        throw; //If the cache isn't available or it's an error we can't handle
+                }
+            }
+        }
+
+        public bool Exists(string key, string region)
+        {
+            try
+            {
+                var cache = GetCache();
+
+                return cache.Get(key, region) != null;
+            }
+            catch (DataCacheException cacheException)
+            {
+                /* 
+                 * Instead of just tracing the exception, we're going to check out the status
+                 * and see if we can retry the request in a second
+                 */
+
+                switch (cacheException.ErrorCode)
+                {
+                    case DataCacheErrorCode.KeyDoesNotExist:
+                    case DataCacheErrorCode.RegionDoesNotExist:
+                        return false; //We weren't able to find the 
+                    case DataCacheErrorCode.RetryLater:
+                        return RetryGet(key,10,100, region) != null;
                     case DataCacheErrorCode.Timeout:
                     default:
                         throw; //If the cache isn't available or it's an error we can't handle

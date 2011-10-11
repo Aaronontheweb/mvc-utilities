@@ -64,14 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\AppFabricCache.cs" />
-    <Compile Include="Caching\AppFabricPessimisticConcurrencyCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="Caching\app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
