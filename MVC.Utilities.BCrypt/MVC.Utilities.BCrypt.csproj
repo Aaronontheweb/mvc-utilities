@@ -52,6 +52,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">
+      <Project>{3C3E3FD8-F1B0-4122-9CF0-92B05F17BF8A}</Project>
+      <Name>MVC.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

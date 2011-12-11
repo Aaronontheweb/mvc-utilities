@@ -61,6 +61,10 @@
     <Compile Include="Display\RelativeDateTimeHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MVC.Utilities.BCrypt\MVC.Utilities.BCrypt.csproj">
+      <Project>{62BA2A47-709F-4869-92F9-7C9CD433E7D3}</Project>
+      <Name>MVC.Utilities.BCrypt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">
       <Project>{3C3E3FD8-F1B0-4122-9CF0-92B05F17BF8A}</Project>
       <Name>MVC.Utilities</Name>
