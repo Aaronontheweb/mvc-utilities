@@ -2,16 +2,13 @@
 <package>
   <metadata>
     <id>mvc-utilities</id>
-    <version>1.01</version>
+    <version>1.02</version>
     <authors>Aaron Stannard, Nick Bernardi</authors>
     <owners>Aaron Stannard</owners>
     <description>Utility classes designed for ASP.NET MVC; deals with encryption, routing, caching, authorization, and various other security issues. Designed by used with Dependency Injection.</description>
     <language>en-US</language>
     <projectUrl>https://github.com/Aaronontheweb/mvc-utilities</projectUrl>
     <licenseUrl>https://github.com/Aaronontheweb/mvc-utilities/blob/master/license.txt</licenseUrl>
-    <dependencies>
-      <dependency id="BCrypt" version="1.0.0.0" />
-    </dependencies>
     <tags>MVC ASP.NET MVC3 Cache Hashing Encryption LowercaseRoute Routing</tags>
   </metadata>
 </package>
