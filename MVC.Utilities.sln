@@ -9,12 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		license.txt = license.txt
 		mvc-utilities-azure.nuspec = mvc-utilities-azure.nuspec
+		mvc-utilities-bcrypt.nuspec = mvc-utilities-bcrypt.nuspec
 		mvc-utilities.nuspec = mvc-utilities.nuspec
 		package.cmd = package.cmd
 		README.textile = README.textile
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.Azure", "MVC.Utilities.Azure\MVC.Utilities.Azure.csproj", "{13C04254-D36B-4F36-8099-CA9C53FE74BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.BCrypt", "MVC.Utilities.BCrypt\MVC.Utilities.BCrypt.csproj", "{62BA2A47-709F-4869-92F9-7C9CD433E7D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +37,10 @@ Global
 		{13C04254-D36B-4F36-8099-CA9C53FE74BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13C04254-D36B-4F36-8099-CA9C53FE74BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13C04254-D36B-4F36-8099-CA9C53FE74BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

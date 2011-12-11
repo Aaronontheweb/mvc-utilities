@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B2163A0-EB56-4195-848F-E51534B4693F}</ProjectGuid>
+    <ProjectGuid>{62BA2A47-709F-4869-92F9-7C9CD433E7D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MVC.Utilities.Tests</RootNamespace>
-    <AssemblyName>MVC.Utilities.Tests</AssemblyName>
+    <RootNamespace>MVC.Utilities.BCrypt</RootNamespace>
+    <AssemblyName>MVC.Utilities.BCrypt</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,21 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.mocks">
-      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="pnunit.framework">
-      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    <Reference Include="DevOne.Security.Cryptography.BCrypt">
+      <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,27 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caching\RuntimeCacheServiceTests.cs" />
-    <Compile Include="Encryption\BCryptServiceTests.cs" />
+    <Compile Include="Encryption\BCryptService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Encryption\SHA1ServiceTests.cs" />
-    <Compile Include="TestData\TestDataHelper.cs" />
-    <Compile Include="Display\RelativeDateTimeHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MVC.Utilities.BCrypt\MVC.Utilities.BCrypt.csproj">
-      <Project>{62BA2A47-709F-4869-92F9-7C9CD433E7D3}</Project>
-      <Name>MVC.Utilities.BCrypt</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">
       <Project>{3C3E3FD8-F1B0-4122-9CF0-92B05F17BF8A}</Project>
       <Name>MVC.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

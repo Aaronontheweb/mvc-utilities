@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevOne.Security.Cryptography.BCrypt">
-      <HintPath>..\packages\BCrypt.1.0.0.0\lib\DevOne.Security.Cryptography.BCrypt.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -51,7 +48,6 @@
     <Compile Include="Caching\CacheServiceBase.cs" />
     <Compile Include="Caching\ICacheService.cs" />
     <Compile Include="Caching\RuntimeCacheService.cs" />
-    <Compile Include="Encryption\BCryptService.cs" />
     <Compile Include="Encryption\ICryptoService.cs" />
     <Compile Include="Encryption\HMACSHA1Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
