@@ -3,13 +3,9 @@
     <InitialDirectory>C:\Repositories\mvc-utilities</InitialDirectory>
   </SnapshotDialog>
   <CoverageFilters>
-    <AllowFilters>
-      <Filter>
-        <ClassFilter>*</ClassFilter>
-        <FunctionFilter>*</FunctionFilter>
-        <ModuleFilter>*</ModuleFilter>
-      </Filter>
-    </AllowFilters>
-    <DenyFilters />
+    <IncludeFilters>
+      <Filter ModuleMask="*" ClassMask="*" FunctionMask="*" />
+    </IncludeFilters>
+    <ExcludeFilters />
   </CoverageFilters>
 </Configuration>
