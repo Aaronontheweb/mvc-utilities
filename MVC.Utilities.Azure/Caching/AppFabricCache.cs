@@ -40,6 +40,7 @@ namespace MVC.Utilities.Caching
         /// <param name="key">The key of the item to retrieve from the cache</param>
         /// <param name="attemptCount">The number of get attempts to make</param>
         /// <param name="waitTime">The number of milliseconds to wait between retry attempts</param>
+        /// <param name="region">The AppFabric Cache region to use</param>
         /// <returns>The object retrieved from the cache</returns>
         private static object RetryGet(string key, int attemptCount = 10, int waitTime = 100, string region = "")
         {
