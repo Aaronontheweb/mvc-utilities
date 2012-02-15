@@ -15,15 +15,26 @@ namespace MVC.Utilities.Encryption
 
         public string HashPassword(string originalStr)
         {
-            var hash = new HMACSHA1 { Key = HexToByte(_validationKey) };
+            //Use the validation key as the default salt
+            return HashPassword(originalStr, _validationKey);
+        }
+
+        public string HashPassword(string originalStr, string salt)
+        {
+            var hash = new HMACSHA1 { Key = HexToByte(salt) };
             var encodedPassword = Convert.ToBase64String(hash.ComputeHash(Encoding.Unicode.GetBytes(originalStr)));
             return encodedPassword;
         }
 
         public bool CheckPassword(string plainText, string hashed)
         {
-            var pass1 = HashPassword(plainText);
+            //Use the validation key as the default salt (consistent with previous implementations)
+            return CheckPassword(plainText, hashed, _validationKey);
+        }
 
+        public bool CheckPassword(string plainText, string hashed, string salt)
+        {
+            var pass1 = HashPassword(plainText, salt);
             return pass1.Equals(hashed);
         }
 
