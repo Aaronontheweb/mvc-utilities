@@ -21,7 +21,12 @@ namespace MVC.Utilities.Encryption
 
         public string HashPassword(string originalStr, string salt)
         {
-            var hash = new HMACSHA1 { Key = HexToByte(salt) };
+            return HashPassword(originalStr, Encoding.Unicode.GetBytes(salt));
+        }
+
+        public string HashPassword(string originalStr, byte[] salt)
+        {
+            var hash = new HMACSHA1 { Key = salt };
             var encodedPassword = Convert.ToBase64String(hash.ComputeHash(Encoding.Unicode.GetBytes(originalStr)));
             return encodedPassword;
         }
@@ -39,7 +44,7 @@ namespace MVC.Utilities.Encryption
         }
 
         //   Converts a hexadecimal string to a byte array. Used to convert encryption key values from the validation key.    
-        private static byte[] HexToByte(string hexString)
+        public static byte[] HexToByte(string hexString)
         {
             var returnBytes = new byte[hexString.Length / 2];
             for (var i = 0; i < returnBytes.Length; i++)

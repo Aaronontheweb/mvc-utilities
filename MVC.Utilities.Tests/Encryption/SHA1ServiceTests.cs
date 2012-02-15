@@ -1,4 +1,7 @@
-﻿using MVC.Utilities.Encryption;
+﻿using System;
+using System.Globalization;
+using System.Text;
+using MVC.Utilities.Encryption;
 using NUnit.Framework;
 
 namespace MVC.Utilities.Tests.Encryption
@@ -42,6 +45,35 @@ namespace MVC.Utilities.Tests.Encryption
             //Now use the validation function to check to see if they're equivalent
 
             Assert.IsTrue(_crypto.CheckPassword(originalPass, hash));
+        }
+
+        /// <summary>
+        /// Can we hash and check a simple password with a salt provided by the caller?
+        /// </summary>
+        [Test]
+        public void CanSha1HashAndCheckSimplePasswordWithCustomSalt()
+        {
+            //Create a basic password...
+            var originalPass = "password";
+
+            //Create a salt using today's datetime
+            var salt = (DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+
+            //Hash it...
+            var hash = _crypto.HashPassword(originalPass, salt);
+
+            //Assert that they're actually different...
+            Assert.AreNotEqual(originalPass, hash);
+
+            //And assert that they're not instances of the same object (I'm being anal here)
+            Assert.AreNotSame(originalPass, hash);
+
+            //Now use the validation function to check to see if they're equivalent
+
+            Assert.IsTrue(_crypto.CheckPassword(originalPass, hash, salt));
+            
+            //Assert that the normal checkpassword method will fail if a different salt is used
+            Assert.IsFalse(_crypto.CheckPassword(originalPass, hash));
         }
 
         /// <summary>
