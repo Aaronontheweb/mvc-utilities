@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>mvc-utilities</id>
-    <version>1.02</version>
+    <version>1.05</version>
     <authors>Aaron Stannard, Nick Bernardi</authors>
     <owners>Aaron Stannard</owners>
     <description>Utility classes designed for ASP.NET MVC; deals with encryption, routing, caching, authorization, and various other security issues. Designed by used with Dependency Injection.</description>
