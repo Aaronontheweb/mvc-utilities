@@ -12,6 +12,11 @@ namespace MVC.Utilities.Encryption
             //Generate a salt for our hash (makes hackers sad :( )
             var salt = BCryptHelper.GenerateSalt();
 
+            return HashPassword(originalStr, salt);
+        }
+
+        public string HashPassword(string originalStr, string salt)
+        {
             //Generate a hash using our salt
             var hash = BCryptHelper.HashPassword(originalStr, salt);
 
@@ -20,6 +25,12 @@ namespace MVC.Utilities.Encryption
         }
 
         public bool CheckPassword(string plainText, string hashed)
+        {
+            //Easy-peasy
+            return BCryptHelper.CheckPassword(plainText, hashed);
+        }
+
+        public bool CheckPassword(string plainText, string hashed, string salt)
         {
             //Easy-peasy
             return BCryptHelper.CheckPassword(plainText, hashed);
