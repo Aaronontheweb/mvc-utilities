@@ -18,6 +18,6 @@ copy MVC.Utilities\bin\Release\MVC.Utilities.dll Download\packages\MVC.Utilities
 copy MVC.Utilities.Azure\bin\Release\MVC.Utilities.Azure.dll Download\packages\MVC.Utilities.Azure\lib\net4
 copy MVC.Utilities.BCrypt\bin\Release\MVC.Utilities.BCrypt.dll Download\packages\MVC.Utilities.BCrypt\lib\net4
 
-nuget.exe pack mvc-utilities.nuspec -b Download\packages\MVC.Utilities -o Download
-nuget.exe pack mvc-utilities-azure.nuspec -b Download\packages\MVC.Utilities.Azure -o Download
-nuget.exe pack mvc-utilities-bcrypt.nuspec -b Download\packages\MVC.Utilities.BCrypt -o Download
+nuget.exe pack mvc-utilities.nuspec -BasePath Download\packages\MVC.Utilities -OutputDirectory Download
+nuget.exe pack mvc-utilities-azure.nuspec -BasePath Download\packages\MVC.Utilities.Azure -OutputDirectory Download
+nuget.exe pack mvc-utilities-bcrypt.nuspec -BasePath Download\packages\MVC.Utilities.BCrypt -OutputDirectory Download
