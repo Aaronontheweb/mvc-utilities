@@ -63,5 +63,35 @@ namespace MVC.Utilities.Tests.Encryption
             Assert.AreEqual(hash1.Length, hash4.Length);
         }
 
+        /// <summary>
+        /// Assert that the hashes for our passwords are the same length
+        /// </summary>
+        [Test]
+        public void AreBCryptHashesWithDifferentSaltsTheSameLength()
+        {
+            //Create our passwords...
+            var pass1 = "password";
+            var pass2 = "passwordpassword";
+            var pass3 = "passwordpasswordpasswordpassword";
+            var pass4 = "passwordpasswordpasswordpasswordpasswordpasswordpasswordpassword";
+
+            //Create our salts
+            var salt1 = "magic";
+            var salt2 = "moarmagic";
+            var salt3 = "doublemagic";
+            var salt4 = "triplemagic";
+
+            //Hash our passwords...
+            var hash1 = _crypto.HashPassword(pass1, salt1);
+            var hash2 = _crypto.HashPassword(pass2, salt2);
+            var hash3 = _crypto.HashPassword(pass3, salt3);
+            var hash4 = _crypto.HashPassword(pass4, salt4);
+
+            //Assert that the lengths are equivalent
+            Assert.AreEqual(hash1.Length, hash2.Length);
+            Assert.AreEqual(hash1.Length, hash3.Length);
+            Assert.AreEqual(hash1.Length, hash4.Length);
+        }
+
     }
 }
