@@ -57,7 +57,7 @@ namespace MVC.Utilities.Tests.Encryption
             var originalPass = "password";
 
             //Create a salt using today's datetime
-            var salt = (DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
+            var salt = Convert.ToBase64String(Encoding.Unicode.GetBytes(DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)));
 
             //Hash it...
             var hash = _crypto.HashPassword(originalPass, salt);
