@@ -67,6 +67,17 @@ namespace MVC.Utilities.Tests.Logging
             Assert.AreEqual(_fakeTraceListener.LastObservedCategory, "Success", string.Format("Expected 'Success', not {0}", _fakeTraceListener.LastObservedCategory));
         }
 
+        [Test(Description = "Should log our exceptions to the right place")]
+        public void ShouldLogExceptionToTrace()
+        {
+            Assert.IsTrue(_fakeTraceListener.Messages.Count == 0);
+
+            var exception = new Exception("OH NOOOOOOOOOOOOOOOOOO");
+            _traceLogging.LogException(exception);
+
+            Assert.IsTrue(_fakeTraceListener.Messages.Count >0 );
+        }
+
         #endregion
     }
 }

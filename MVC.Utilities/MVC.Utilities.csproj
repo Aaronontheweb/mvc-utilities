@@ -56,7 +56,6 @@
     <Compile Include="Routing\SlugHelper.cs" />
     <Compile Include="Security\UploadedImageValidator.cs" />
     <Compile Include="Display\DateTimeLocalizationHelper.cs" />
-    <Compile Include="Logging\EventLogLoggingService.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
     <Compile Include="Logging\TraceLoggingService.cs" />
   </ItemGroup>

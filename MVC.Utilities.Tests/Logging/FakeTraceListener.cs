@@ -24,6 +24,11 @@ namespace MVC.Utilities.Tests.Logging
             WriteLine(o.ToString(), category);
         }
 
+        public override void Fail(string message)
+        {
+            base.Fail(message);
+        }
+
         public override void Write(string message)
         {
             Messages.Add(message);

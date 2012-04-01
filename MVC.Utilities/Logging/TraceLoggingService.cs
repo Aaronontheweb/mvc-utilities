@@ -19,7 +19,7 @@ namespace MVC.Utilities.Logging
 
         public void LogException(Exception ex)
         {
-            Trace.TraceError(ex.Message);
+            Trace.TraceError(ex.ToTraceString());
         }
 
         public void LogException(Exception ex, LogEntryType entryType)
