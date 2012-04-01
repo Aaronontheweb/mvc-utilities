@@ -4,18 +4,25 @@ namespace MVC.Utilities.Logging
 {
     public class EventLogLoggingService : ILoggingService
     {
-        private readonly string _eventLogSource;
+        private EventLog log;
 
-        public EventLogLoggingService(string eventLogSource)
+        public EventLogLoggingService(string eventLogSource) : this(eventLogSource, "Application"){}
+
+        public EventLogLoggingService(string eventLogSource, string logName)
         {
-            _eventLogSource = eventLogSource;
+            if (!EventLog.SourceExists(eventLogSource))
+            {
+                EventLog.CreateEventSource(eventLogSource, logName);
+            }
+
+            log = new EventLog(logName, ".", eventLogSource);
         }
 
         #region Implementation of ILoggingService
 
         public void LogMessage(string message)
         {
-            EventLog.WriteEntry(_eventLogSource, message);
+            log.WriteEntry(message);
         }
 
         #endregion
