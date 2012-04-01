@@ -44,6 +44,13 @@ namespace MVC.Utilities.Tests.Logging
 
         #region Tests
 
+        [Test(Description = "If we're using LogEntryType.Success, the ToString() of that should read 'Success'")]
+        public void ShouldMapLogEventTypeToString()
+        {
+            var logEntryType = LogEntryType.Success;
+            Assert.AreEqual("Success", logEntryType.ToString());
+        }
+
         [Test(Description = "Should log a simple message to our trace listener")]
         public void ShouldLogToTrace()
         {
@@ -55,6 +62,7 @@ namespace MVC.Utilities.Tests.Logging
             _traceLogging.LogMessage(message, LogEntryType.Success);
 
             //Setting a category flag should not impact the contents of the message itself
+            Assert.AreEqual(2, _fakeTraceListener.Messages.Count);
             Assert.IsTrue(_fakeTraceListener.Messages.All(x => x.Equals(message)));
             Assert.AreEqual(_fakeTraceListener.LastObservedCategory, "Success", string.Format("Expected 'Success', not {0}", _fakeTraceListener.LastObservedCategory));
         }

@@ -21,13 +21,18 @@ namespace MVC.Utilities.Tests.Logging
 
         public override void WriteLine(object o, string category)
         {
-            Messages.Add(o.ToString());
-            LastObservedCategory = category;
+            WriteLine(o.ToString(), category);
         }
 
         public override void Write(string message)
         {
             Messages.Add(message);
+        }
+
+        public override void WriteLine(string message, string category)
+        {
+            Messages.Add(message);
+            LastObservedCategory = category;
         }
 
         public override void WriteLine(string message)
