@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Caching\RuntimeCacheServiceTests.cs" />
     <Compile Include="Encryption\BCryptServiceTests.cs" />
+    <Compile Include="Logging\FakeTraceListener.cs" />
     <Compile Include="Logging\TraceLoggingServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Encryption\SHA1ServiceTests.cs" />
