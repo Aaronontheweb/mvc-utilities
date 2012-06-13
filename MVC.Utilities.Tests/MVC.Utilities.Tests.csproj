@@ -54,6 +54,7 @@
     <Compile Include="Logging\TraceLoggingServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Encryption\SHA1ServiceTests.cs" />
+    <Compile Include="Routing\SlugHelperTests.cs" />
     <Compile Include="TestData\TestDataHelper.cs" />
     <Compile Include="Display\RelativeDateTimeHelperTests.cs" />
   </ItemGroup>
