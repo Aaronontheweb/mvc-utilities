@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities", "MVC.Utilities\MVC.Utilities.csproj", "{3C3E3FD8-F1B0-4122-9CF0-92B05F17BF8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.Tests", "MVC.Utilities.Tests\MVC.Utilities.Tests.csproj", "{1B2163A0-EB56-4195-848F-E51534B4693F}"
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.Azure", "MVC.Utilities.Azure\MVC.Utilities.Azure.csproj", "{13C04254-D36B-4F36-8099-CA9C53FE74BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.BCrypt", "MVC.Utilities.BCrypt\MVC.Utilities.BCrypt.csproj", "{62BA2A47-709F-4869-92F9-7C9CD433E7D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.Memcached", "MVC.Utilities.Memcached\MVC.Utilities.Memcached.csproj", "{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62BA2A47-709F-4869-92F9-7C9CD433E7D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
