@@ -80,9 +80,14 @@ namespace MVC.Utilities.Memcached
             {
                 return cache.Store(StoreMode.Set, key, value, policy.AbsoluteExpiration.DateTime);
             }
-            
-            //Sliding expiration
-            return cache.Store(StoreMode.Set, key, value, policy.SlidingExpiration);
+
+            if (policy.SlidingExpiration.Ticks != _default_duration.Ticks) //Sliding expiration
+            {
+                return cache.Store(StoreMode.Set, key, value, policy.SlidingExpiration);
+            }
+
+            return cache.Store(StoreMode.Set, key, value);
+
         }
 
         #endregion
@@ -103,9 +108,9 @@ namespace MVC.Utilities.Memcached
 
         public override bool Exists(string key)
         {
-            object objInDb;
             var cache = GetCacheClient();
-            return cache.TryGet(key, out objInDb);
+            var cacheResult = cache.Get(key);
+            return cacheResult != null;
         }
 
         #endregion

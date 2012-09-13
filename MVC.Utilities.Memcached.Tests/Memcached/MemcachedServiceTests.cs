@@ -28,12 +28,12 @@ namespace MVC.Utilities.Memcached.Tests.Memcached
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
-            _cacheService = new MemcachedService(TimeSpan.FromMinutes(5));
+            _cacheService = new MemcachedService(new TimeSpan(0, 10, 0));
 
             ProcessStartInfo memcacheInfo;
             memcacheInfo = new ProcessStartInfo(MemcacheProcessHelper.MemcachePath);
             memcacheInfo.WorkingDirectory = Path.GetDirectoryName(MemcacheProcessHelper.MemcachePath);
-            memcacheInfo.Arguments = string.Format("-p {0}", port);
+            memcacheInfo.Arguments = string.Format("-p {0} -vvv", port);
             memcacheInfo.UseShellExecute = true;
             memcacheInfo.CreateNoWindow = false;
             memcacheInfo.RedirectStandardError = false;
@@ -79,7 +79,79 @@ namespace MVC.Utilities.Memcached.Tests.Memcached
 
             //Verify that the user is in the cache
             Assert.IsTrue(result);
-            Assert.IsTrue(_cacheService.Exists(user.UserName));
+        }
+
+        [Test(Description = "Should be able to use the Exists method to find an item we saved to the cache")]
+        public void Should_Find_Item_in_Cache()
+        {
+            //Save data to the cache
+            var result = _cacheService.Save("animal", "bunny");
+
+            //Verify that the user is in the cache
+            Assert.IsTrue(result);
+
+            var itemInCache = _cacheService.Exists("animal");
+            Assert.IsTrue(itemInCache);
+        }
+
+        [Test(Description = "Should be able to use the Get method to retrieve an item we saved to the cache")]
+        public void Should_Get_Item_From_Cache()
+        {
+            //Save data to the cache
+            var result = _cacheService.Save("person", "Elvis");
+
+            //Verify that the user is in the cache
+            Assert.IsTrue(result);
+
+            var itemInCache = _cacheService.Get("person");
+            Assert.IsInstanceOf<string>(itemInCache);
+            Assert.AreEqual("Elvis", (string)itemInCache);
+        }
+
+        [Test(Description = "Should be able to use the Get method to retrieve a .NET class instance we saved to the cache")]
+        public void Should_Get_Poco_Item_From_Cache()
+        {
+            var user = TestDataHelper.CreateNewUser();
+
+            //Save data to the cache
+            var result = _cacheService.Save(user.UserName, user);
+
+            //Verify that the user is in the cache
+            Assert.IsTrue(result);
+
+            var itemInCache = _cacheService.Get(user.UserName);
+            Assert.IsInstanceOf<UserAccount>(itemInCache);
+            Assert.AreEqual(user.EmailAddress, ((UserAccount)itemInCache).EmailAddress);
+        }
+
+        [Test(Description = "Should be able to overwrite an item in the cache")]
+        public void Should_Overwrite_Item_in_Cache()
+        {
+            var user = TestDataHelper.CreateNewUser();
+
+            //Save data to the cache
+            var result = _cacheService.Save(user.UserName, user);
+
+            //Verify that the user is in the cache
+            Assert.IsTrue(result);
+
+            //Verify that the user is actually in the database
+            var itemInCache = _cacheService.Get(user.UserName);
+            Assert.IsInstanceOf<UserAccount>(itemInCache);
+            Assert.AreEqual(user.EmailAddress, ((UserAccount)itemInCache).EmailAddress);
+
+            var originalName = user.UserName;
+            var newName = "Bears";
+            user.UserName = newName;
+
+            Assert.AreNotEqual(originalName, user.UserName);
+            Assert.IsTrue(_cacheService.Save(originalName, user));
+
+            itemInCache = _cacheService.Get(originalName);
+            Assert.IsInstanceOf<UserAccount>(itemInCache);
+            Assert.AreEqual(user.EmailAddress, ((UserAccount)itemInCache).EmailAddress);
+            Assert.AreNotEqual(originalName, ((UserAccount)itemInCache).UserName);
+            Assert.AreEqual(newName, ((UserAccount)itemInCache).UserName);
         }
 
         #endregion
