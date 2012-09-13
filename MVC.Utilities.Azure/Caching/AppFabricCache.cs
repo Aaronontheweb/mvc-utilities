@@ -29,7 +29,6 @@ namespace MVC.Utilities.Caching
 
             _factory = new DataCacheFactory();
             _cache = _factory.GetDefaultCache();
-
             return _cache;
         }
 

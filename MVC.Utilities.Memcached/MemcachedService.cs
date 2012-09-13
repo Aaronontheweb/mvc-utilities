@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Caching;
-using System.Text;
-using System.Threading.Tasks;
 using Enyim.Caching;
 using Enyim.Caching.Configuration;
 using Enyim.Caching.Memcached;
@@ -95,17 +91,21 @@ namespace MVC.Utilities.Memcached
 
         public override object Get(string key)
         {
-            throw new NotImplementedException();
+            var cache = GetCacheClient();
+            return cache.Get(key);
         }
 
         public override bool Remove(string key)
         {
-            throw new NotImplementedException();
+            var cache = GetCacheClient();
+            return cache.Remove(key);
         }
 
         public override bool Exists(string key)
         {
-            throw new NotImplementedException();
+            object objInDb;
+            var cache = GetCacheClient();
+            return cache.TryGet(key, out objInDb);
         }
 
         #endregion
