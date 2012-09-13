@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.BCrypt", "MVC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.Memcached", "MVC.Utilities.Memcached\MVC.Utilities.Memcached.csproj", "{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Utilities.Memcached.Tests", "MVC.Utilities.Memcached.Tests\MVC.Utilities.Memcached.Tests.csproj", "{A191D308-43CB-4F28-933E-074D8CD3A850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20C8A4B3-1B82-439F-9C75-6CEBCE9EEA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A191D308-43CB-4F28-933E-074D8CD3A850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A191D308-43CB-4F28-933E-074D8CD3A850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A191D308-43CB-4F28-933E-074D8CD3A850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A191D308-43CB-4F28-933E-074D8CD3A850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

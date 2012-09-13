@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B2163A0-EB56-4195-848F-E51534B4693F}</ProjectGuid>
+    <ProjectGuid>{A191D308-43CB-4F28-933E-074D8CD3A850}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MVC.Utilities.Tests</RootNamespace>
-    <AssemblyName>MVC.Utilities.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>MVC.Utilities.Memcached.Tests</RootNamespace>
+    <AssemblyName>MVC.Utilities.Memcached.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,16 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.1.12217, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,30 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caching\RuntimeCacheServiceTests.cs" />
-    <Compile Include="Encryption\BCryptServiceTests.cs" />
-    <Compile Include="Logging\FakeTraceListener.cs" />
-    <Compile Include="Logging\TraceLoggingServiceTests.cs" />
+    <Compile Include="..\MVC.Utilities.Tests\TestData\TestDataHelper.cs">
+      <Link>TestData\TestDataHelper.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Encryption\SHA1ServiceTests.cs" />
-    <Compile Include="Routing\SlugHelperTests.cs" />
-    <Compile Include="TestData\TestDataHelper.cs" />
-    <Compile Include="Display\RelativeDateTimeHelperTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MVC.Utilities.BCrypt\MVC.Utilities.BCrypt.csproj">
-      <Project>{62BA2A47-709F-4869-92F9-7C9CD433E7D3}</Project>
-      <Name>MVC.Utilities.BCrypt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">
-      <Project>{3C3E3FD8-F1B0-4122-9CF0-92B05F17BF8A}</Project>
-      <Name>MVC.Utilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MVC.Utilities.Memcached\MVC.Utilities.Memcached.csproj">
+      <Project>{20c8a4b3-1b82-439f-9c75-6cebce9eea64}</Project>
+      <Name>MVC.Utilities.Memcached</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MVC.Utilities\MVC.Utilities.csproj">
+      <Project>{3c3e3fd8-f1b0-4122-9cf0-92b05f17bf8a}</Project>
+      <Name>MVC.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Memcached\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
