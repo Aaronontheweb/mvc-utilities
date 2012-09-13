@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Caching;
 
 namespace MVC.Utilities.Caching
@@ -43,6 +44,11 @@ namespace MVC.Utilities.Caching
         public override object Get(string key)
         {
             return _cache.Get(key);
+        }
+
+        public override IDictionary<string, object> Get(string[] keys)
+        {
+            return _cache.GetValues(keys);
         }
 
         public override bool Remove(string key)

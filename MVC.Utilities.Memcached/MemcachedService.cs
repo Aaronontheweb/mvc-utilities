@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Caching;
 using Enyim.Caching;
 using Enyim.Caching.Configuration;
@@ -98,6 +99,12 @@ namespace MVC.Utilities.Memcached
         {
             var cache = GetCacheClient();
             return cache.Get(key);
+        }
+
+        public override IDictionary<string, object> Get(string[] keys)
+        {
+            var cache = GetCacheClient();
+            return cache.Get(keys);
         }
 
         public override bool Remove(string key)

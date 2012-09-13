@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Caching;
 
 namespace MVC.Utilities.Caching
@@ -27,6 +28,7 @@ namespace MVC.Utilities.Caching
         protected abstract bool Save(string key, object value, CacheItemPolicy policy);
 
         public abstract object Get(string key);
+        public abstract IDictionary<string, object> Get(string[] keys);
 
         public abstract bool Remove(string key);
 

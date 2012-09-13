@@ -262,6 +262,11 @@ namespace MVC.Utilities.Caching
             }
         }
 
+        public override IDictionary<string, object> Get(string[] keys)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Remove(string key, string region)
         {
             try

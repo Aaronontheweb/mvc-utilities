@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace MVC.Utilities.Caching
 {
@@ -44,6 +44,13 @@ namespace MVC.Utilities.Caching
         /// <param name="key">The key used to identify this object</param>
         /// <returns>The object from the database, or an exception if the object doesn't exist</returns>
         object Get(string key);
+
+        /// <summary>
+        /// Gets a set of cached objects
+        /// </summary>
+        /// <param name="keys">All of the keys of the objects we wish to retrieve</param>
+        /// <returns>A key / value dictionary containing all of the keys and objects we wanted to retrieve</returns>
+        IDictionary<string, object> Get(string[] keys);
 
         /// <summary>
         /// Retrieves a cached object using an indexers
