@@ -181,7 +181,7 @@ namespace MVC.Utilities.Caching
             return cache.GetObjectsInRegion(region);
         }
 
-        protected override void Save(string key, object value, CacheItemPolicy policy)
+        protected override bool Save(string key, object value, CacheItemPolicy policy)
         {
             try
             {
@@ -194,14 +194,15 @@ namespace MVC.Utilities.Caching
 
                 var cache = GetCache();
 
-                cache.Put(key, value, expiration);
+                var item = cache.Put(key, value, expiration);
+                return true;
             }
             catch (DataCacheException cacheException)
             {
                 switch (cacheException.ErrorCode)
                 {
                     case DataCacheErrorCode.RetryLater:
-                        RetryPut(key, value, _default_duration);
+                        return RetryPut(key, value, _default_duration);
                         break;
                     case DataCacheErrorCode.Timeout:
                     default:

@@ -24,7 +24,7 @@ namespace MVC.Utilities.Caching
         /// <param name="key">The key of the item to be saved</param>
         /// <param name="value">The value of the item to be saved</param>
         /// <param name="policy">The expiration policy of the item to be saved</param>
-        protected abstract void Save(string key, object value, CacheItemPolicy policy);
+        protected abstract bool Save(string key, object value, CacheItemPolicy policy);
 
         public abstract object Get(string key);
 
@@ -36,19 +36,19 @@ namespace MVC.Utilities.Caching
 
         public abstract bool Exists(string key);
 
-        public void Save(string key, object value)
+        public bool Save(string key, object value)
         {
-            Save(key, value, GetDefaultPolicy());
+            return Save(key, value, GetDefaultPolicy());
         }
 
-        public void Save(string key, object value, TimeSpan slidingExpiration)
+        public bool Save(string key, object value, TimeSpan slidingExpiration)
         {
-            Save(key, value, GetSlidingPolicy(slidingExpiration));
+            return Save(key, value, GetSlidingPolicy(slidingExpiration));
         }
 
-        public void Save(string key, object value, DateTime absoluteExpiration)
+        public bool Save(string key, object value, DateTime absoluteExpiration)
         {
-            Save(key, value, GetAbsolutePolicy(absoluteExpiration));
+            return Save(key, value, GetAbsolutePolicy(absoluteExpiration));
         }
 
         public object this[string key]

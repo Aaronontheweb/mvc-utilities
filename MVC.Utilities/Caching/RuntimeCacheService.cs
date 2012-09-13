@@ -27,15 +27,16 @@ namespace MVC.Utilities.Caching
         /// <param name="key">The key of the item to be saved</param>
         /// <param name="value">The value of the item to be saved</param>
         /// <param name="policy">The expiration policy of the item to be saved</param>
-        protected override void Save(string key, object value, CacheItemPolicy policy)
+        protected override bool Save(string key, object value, CacheItemPolicy policy)
         {
             if (Exists(key))
             {
                 _cache.Set(key, value, policy);
+                return true;
             }
             else
             {
-                _cache.Add(key, value, policy);
+                return _cache.Add(key, value, policy);
             }
         }
 

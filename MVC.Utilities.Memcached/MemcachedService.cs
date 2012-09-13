@@ -68,26 +68,25 @@ namespace MVC.Utilities.Memcached
 
         #region Overrides of CacheServiceBase
 
-        protected override void Save(string key, object value, CacheItemPolicy policy)
+        protected override bool Save(string key, object value, CacheItemPolicy policy)
         {
             var cache = GetCacheClient();
 
             var expiration = policy.SlidingExpiration;
-            bool cacheOpResult = false;
 
+            //No set expiration policy
             if (policy.SlidingExpiration == default(TimeSpan) && policy.AbsoluteExpiration == default(DateTimeOffset))
             {
-                cacheOpResult = cache.Store(StoreMode.Set, key, value);
+                return cache.Store(StoreMode.Set, key, value);
             }
-            else if (policy.SlidingExpiration == default(TimeSpan)) //Absolute expiration
+            
+            if (policy.SlidingExpiration == default(TimeSpan)) //Absolute expiration
             {
-                cacheOpResult = cache.Store(StoreMode.Set, key, value, policy.AbsoluteExpiration.DateTime);
+                return cache.Store(StoreMode.Set, key, value, policy.AbsoluteExpiration.DateTime);
             }
-            else //Sliding expiration
-            {
-                cacheOpResult = cache.Store(StoreMode.Set, key, value, policy.SlidingExpiration);
-            }
-
+            
+            //Sliding expiration
+            return cache.Store(StoreMode.Set, key, value, policy.SlidingExpiration);
         }
 
         #endregion

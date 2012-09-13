@@ -20,7 +20,7 @@ namespace MVC.Utilities.Caching
         /// </summary>
         /// <param name="key">The key used to map this object</param>
         /// <param name="value">The value to be saved to the cache</param>
-        void Save(string key, object value);
+        bool Save(string key, object value);
 
         /// <summary>
         /// Insert an item in the cache with the expiration that it will expire if not used past its window
@@ -28,7 +28,7 @@ namespace MVC.Utilities.Caching
         /// <param name="key">The key used to map this object</param>
         /// <param name="value">The object to insert</param>
         /// <param name="slidingExpiration">The expiration window</param>
-        void Save(string key, object value, TimeSpan slidingExpiration);
+        bool Save(string key, object value, TimeSpan slidingExpiration);
 
         /// <summary>
         /// Insert an item in the cache with the expiration that will expire at a specific point in time
@@ -36,7 +36,7 @@ namespace MVC.Utilities.Caching
         /// <param name="key">The key used to map this object</param>
         /// <param name="value">The object to insert</param>
         /// <param name="absoluteExpiration">The DateTime in which this object will expire</param>
-        void Save(string key, object value, DateTime absoluteExpiration);
+        bool Save(string key, object value, DateTime absoluteExpiration);
 
         /// <summary>
         /// Retrieves a cached object from the cache
