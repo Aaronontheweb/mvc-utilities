@@ -27,6 +27,7 @@ namespace MVC.Utilities.Tests.TestData
 
     }
 
+    [Serializable]
     public class UserAccount
     {
         public DateTime DateJoined { get; set; }
