@@ -25,6 +25,21 @@ end
 # Control flow
 #-----------------------
 
+desc "Bumps build number, runs build, and tests output"
+task :default => [:bump_build_number, :msbuild, :test]
+
+desc "Dry run of pushing to NuGet"
+task :test_nuget => [:pack]
+
+desc "Pushes a small revision to NuGet"
+task :release_revision => [:bump_revision, :push]
+
+desc "Pushes a minor release to NuGet"
+task :release_minor => [:bump_minor, :push]
+
+desc "Pushes a major release to NuGet"
+task :release_minor => [:bump_major, :push]
+
 #-----------------------
 # Version Management
 #-----------------------
