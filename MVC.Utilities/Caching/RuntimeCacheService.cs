@@ -7,6 +7,10 @@ namespace MVC.Utilities.Caching
     public class RuntimeCacheProvider : CacheServiceBase
     {
         private readonly ObjectCache _cache;
+        
+        public RuntimeCacheProvider() : this(MemoryCache.Default, new TimeSpan(0, 20, 0))
+        {
+        }
 
         public RuntimeCacheProvider(ObjectCache cache, TimeSpan defaultSlidingDuration)
             : base(defaultSlidingDuration)
