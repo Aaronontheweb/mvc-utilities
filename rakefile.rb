@@ -76,7 +76,7 @@ end
 # Tests
 #-----------------------
 
-nunit :nunit_tests => [:msbuild] do |nunit|
+nunit :test => [:msbuild] do |nunit|
 	nunit.command = Commands[:nunit]
 	nunit.options '/framework v4.0.30319'
 
@@ -250,10 +250,40 @@ output :azure_net40_output => [:prep_output] do |out|
 	out.file Files[:azure][:bin]
 end
 #-----------------------
-# NuGet Packages
+# NuGet Pack
 #-----------------------
+
+desc "Packs all of the MVC.Utilities solutions"
+task :pack_all => [:mvcutilities_pack, :bcrypt_pack, :azure_pack, :memcached_pack]
 
 nugetpack :mvcutilities_pack => [:test, :mvcutilities_output, :mvcutilities_nuspec] do |nuget|
 	nuget.command = Commands[:nuget]
 	nuget.nuspec = File.join(Folders[:nuget_build], "#{Projects[:mvcutilities][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuget.base_folder = Folders[:mvcutilities_nuspec][:root]
+	nuget.output = Folders[:nuget_build]
 end
+
+nugetpack :bcrypt_pack => [:test, :bcrypt_output, :bcrypt_nuspec] do |nuget|
+	nuget.command = Commands[:nuget]
+	nuget.nuspec = File.join(Folders[:nuget_build], "#{Projects[:bcrypt][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuget.base_folder = Folders[:bcrypt_nuspec][:root]
+	nuget.output = Folders[:nuget_build]
+end
+
+nugetpack :azure_pack => [:test, :azure_output, :azure_nuspec] do |nuget|
+	nuget.command = Commands[:nuget]
+	nuget.nuspec = File.join(Folders[:nuget_build], "#{Projects[:azure][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuget.base_folder = Folders[:azure_nuspec][:root]
+	nuget.output = Folders[:nuget_build]
+end
+
+nugetpack :memcached_pack => [:test, :memcached_output, :memcached_nuspec] do |nuget|
+	nuget.command = Commands[:nuget]
+	nuget.nuspec = File.join(Folders[:nuget_build], "#{Projects[:memcached][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuget.base_folder = Folders[:memcached_nuspec][:root]
+	nuget.output = Folders[:nuget_build]
+end
+
+#-----------------------
+# NuGet Push
+#-----------------------
