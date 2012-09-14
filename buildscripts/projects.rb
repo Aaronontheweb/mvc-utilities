@@ -2,7 +2,7 @@
 # Project data for MVC.Utilities
 #----------------------------------
 
-Projects => {
+Projects = {
 	:language = "en-US",
 	:project_url = "https://github.com/Aaronontheweb/mvc-utilities",
 	:license_url = "https://github.com/Aaronontheweb/mvc-utilities/blob/master/license.txt",
@@ -43,7 +43,7 @@ Projects => {
 			:company => "StannardLabs",
 			:guid => "3d5b58db-60c0-4c05-a596-26a2df183b7b",
 			:dependencies => {
-				:bcrypt => {
+				:AzureCaching => {
 					:name => "WindowsAzure.Caching",
 					:version => "1.6.0.0"
 				}
@@ -61,8 +61,8 @@ Projects => {
 			:guid => "724b0477-f465-4e88-826f-888e83f59940"
 			:dependencies => {
 				:bcrypt => {
-					:name => "WindowsAzure.Caching",
-					:version => "1.6.0.0"
+					:name => "EnyimMemcached",
+					:version => "2.11.0.0"
 				}
 			}
 	}
