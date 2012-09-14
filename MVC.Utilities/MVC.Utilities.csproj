@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Authentication\FormsAuthentication.cs" />
     <Compile Include="Caching\CacheServiceBase.cs" />
     <Compile Include="Caching\ICacheService.cs" />
