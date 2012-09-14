@@ -254,7 +254,7 @@ end
 #-----------------------
 
 desc "Packs all of the MVC.Utilities solutions"
-task :pack_all => [:mvcutilities_pack, :bcrypt_pack, :azure_pack, :memcached_pack]
+task :pack => [:mvcutilities_pack, :bcrypt_pack, :azure_pack, :memcached_pack]
 
 nugetpack :mvcutilities_pack => [:test, :mvcutilities_output, :mvcutilities_nuspec] do |nuget|
 	nuget.command = Commands[:nuget]
@@ -287,3 +287,26 @@ end
 #-----------------------
 # NuGet Push
 #-----------------------
+
+desc "Pushes all of our NuGet packages directly to nuget.org"
+task :push => [:mvcutilities_push, :bcrypt_push, :azure_push, :memcached_push]
+
+nugetpush :mvcutilities_push => [:pack] do |nuget|
+    nuget.command = Commands[:nuget]
+    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:mvcutilities][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+end
+
+nugetpush :bcrypt_push => [:pack] do |nuget|
+    nuget.command = Commands[:nuget]
+    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:bcrypt][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+end
+
+nugetpush :azure_push => [:pack] do |nuget|
+    nuget.command = Commands[:nuget]
+    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:azure][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+end
+
+nugetpush :memcached_push => [:pack] do |nuget|
+    nuget.command = Commands[:nuget]
+    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:memcached][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+end
