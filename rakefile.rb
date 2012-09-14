@@ -112,6 +112,7 @@ nuspec :bcrypt_nuspec do |nuspec|
 	nuspec.language = Projects[:language]
 	nuspec.licenseUrl = Projects[:licenseUrl]
 	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.dependency Projects[:mvcutilities][:id], env_buildversion
 	nuspec.dependency Projects[:bcrypt][:dependencies][:bcrypt][:name], Projects[:bcrypt][:dependencies][:bcrypt][:version]
 	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:bcrypt][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
 	nuspec.tags = "MVC ASP.NET MVC3 MVC4 Hashing Encryption BCrypt Blowfish"
@@ -126,6 +127,7 @@ nuspec :azure_nuspec do |nuspec|
 	nuspec.language = Projects[:language]
 	nuspec.licenseUrl = Projects[:licenseUrl]
 	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.dependency Projects[:mvcutilities][:id], env_buildversion
 	nuspec.dependency Projects[:azure][:dependencies][:AzureCaching][:name], Projects[:azure][:dependencies][:AzureCaching][:version]
 	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:azure][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
 	nuspec.tags = "Caching Cache AppFabric AppFabricCache Memcache Azure MVC MVC4 MVC3"
@@ -140,6 +142,7 @@ nuspec :memcached_nuspec do |nuspec|
 	nuspec.language = Projects[:language]
 	nuspec.licenseUrl = Projects[:licenseUrl]
 	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.dependency Projects[:mvcutilities][:id], env_buildversion
 	nuspec.dependency Projects[:memcached][:dependencies][:enyim][:name], Projects[:memcached][:dependencies][:enyim][:version]
 	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:memcached][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
 	nuspec.tags = "Caching Cache Memcache Memcached MVC MVC4 MVC3"
@@ -249,3 +252,8 @@ end
 #-----------------------
 # NuGet Packages
 #-----------------------
+
+nugetpack :mvcutilities_pack => [:test, :mvcutilities_output, :mvcutilities_nuspec] do |nuget|
+	nuget.command = Commands[:nuget]
+	nuget.nuspec = File.join(Folders[:nuget_build], "#{Projects[:mvcutilities][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+end
