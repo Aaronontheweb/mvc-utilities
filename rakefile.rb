@@ -20,3 +20,7 @@ require File.expand_path(File.dirname(__FILE__)) + '/buildscripts/paths'
 def env_buildversion
 	bumper_version.to_s
 end
+
+#-----------------------
+# Control flow
+#-----------------------
