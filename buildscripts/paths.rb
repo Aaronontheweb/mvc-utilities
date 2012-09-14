@@ -7,11 +7,11 @@ Folders = {
 	:root => root_folder,
 	:tools => File.join(root_folder, "tools"),
 	:out => File.join(root_folder, "build"),
-	:nunit => File.join(root_folder, "tools", "nunit")
+	:nunit => File.join(root_folder, "tools", "nunit"),
 	:nuget_bin => File.join(root_folder, ".nuget"),
 
 	:mvcutilities_tests => File.join(root_folder, Projects[:mvcutilities][:test_dir]),
-	:memcached_tests => File.join(root_folder, Projects[:memcached][:test_dir])
+	:memcached_tests => File.join(root_folder, Projects[:memcached][:test_dir]),
 
 	:mvcutilities_nuspec => {
 			:root => File.join(root_folder, "build", "nuget", Projects[:mvcutilities][:dir]),
@@ -83,8 +83,7 @@ Files = {
 
 Commands = {
 	:nunit => File.join(Folders[:nunit], "nunit-console.exe"),
-	:nuget => File.join(Folders[:nuget_bin], "NuGet.exe"),
-	:ilmerge => File.join(Folders[:ilmerge], "ilmerge.exe")
+	:nuget => File.join(Folders[:nuget_bin], "NuGet.exe")
 }
 
 #safe function for creating output directories
