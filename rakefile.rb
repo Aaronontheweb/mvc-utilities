@@ -129,6 +129,10 @@ end
 
 task :prep_output => [:clean_output_folders, :create_output_folders]
 task :mvcutilities_output => [:mvcutilities_static_output, :mvcutilities_net40_output]
+task :bcrypt_output => [:bcrypt_static_output, :bcrypt_net40_output]
+task :memcached_output => [:memcached_static_output, :memcached_net40_output]
+task :azure_output => [:azure_static_output, :azure_net40_output]
+task :all_output => [:mvcutilities_output, :bcrypt_output, :memcached_output, :azure_output]
 
 output :mvcutilities_static_output => [:prep_output] do |out|
 	out.from Folders[:root]
@@ -144,6 +148,47 @@ output :mvcutilities_net40_output => [:prep_output] do |out|
 	out.file Files[:mvcutilities][:bin]
 end
 
+output :bcrypt_static_output => [:prep_output] do |out|
+	out.from Folders[:root]
+	out.to Folders[:bcrypt_nuspec][:root]
+	out.file Files[:readme]
+	out.file Files[:license]
+end
+
+output :bcrypt_net40_output => [:prep_output] do |out|
+	out.from Folders[:bcrypt_bin]
+	create_dir(Folders[:bcrypt_nuspec][:lib])
+	out.to Folders[:bcrypt_nuspec][:net40]
+	out.file Files[:bcrypt][:bin]
+end
+
+output :memcached_static_output => [:prep_output] do |out|
+	out.from Folders[:root]
+	out.to Folders[:memcached_nuspec][:root]
+	out.file Files[:readme]
+	out.file Files[:license]
+end
+
+output :memcached_net40_output => [:prep_output] do |out|
+	out.from Folders[:memcached_bin]
+	create_dir(Folders[:memcached_nuspec][:lib])
+	out.to Folders[:memcached_nuspec][:net40]
+	out.file Files[:memcached][:bin]
+end
+
+output :azure_static_output => [:prep_output] do |out|
+	out.from Folders[:root]
+	out.to Folders[:azure_nuspec][:root]
+	out.file Files[:readme]
+	out.file Files[:license]
+end
+
+output :azure_net40_output => [:prep_output] do |out|
+	out.from Folders[:azure_bin]
+	create_dir(Folders[:azure_nuspec][:lib])
+	out.to Folders[:azure_nuspec][:net40]
+	out.file Files[:azure][:bin]
+end
 #-----------------------
 # NuGet Packages
 #-----------------------
