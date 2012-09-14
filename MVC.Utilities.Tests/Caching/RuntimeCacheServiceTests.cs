@@ -22,7 +22,7 @@ namespace MVC.Utilities.Tests.Caching
         public void Setup()
         {
             //Create a new in-memory cache with a default sliding expiration of 20 minutes
-            _cacheService = new RuntimeCacheProvider(MemoryCache.Default, new TimeSpan(0, 0, 20));
+            _cacheService = new RuntimeCacheService(MemoryCache.Default, new TimeSpan(0, 0, 20));
 
             //Create a dictionary we can use to clean-up items from the cache.
             _cachedObjects = new List<string>();
