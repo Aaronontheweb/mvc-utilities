@@ -32,13 +32,13 @@ desc "Dry run of pushing to NuGet"
 task :test_nuget => [:pack]
 
 desc "Pushes a small revision to NuGet"
-task :release_revision => [:bump_revision, :push]
+task :release_revision => [:bump_revision_number, :push]
 
 desc "Pushes a minor release to NuGet"
-task :release_minor => [:bump_minor, :push]
+task :release_minor => [:bump_minor_version_number, :push]
 
 desc "Pushes a major release to NuGet"
-task :release_minor => [:bump_major, :push]
+task :release_minor => [:bump_major_version_number, :push]
 
 #-----------------------
 # Version Management
@@ -308,20 +308,20 @@ task :push => [:mvcutilities_push, :bcrypt_push, :azure_push, :memcached_push]
 
 nugetpush :mvcutilities_push => [:pack] do |nuget|
     nuget.command = Commands[:nuget]
-    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:mvcutilities][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+    nuget.package = File.join(Folders[:nuget_build], "#{Projects[:mvcutilities][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
 end
 
 nugetpush :bcrypt_push => [:pack] do |nuget|
     nuget.command = Commands[:nuget]
-    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:bcrypt][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+    nuget.package = File.join(Folders[:nuget_build], "#{Projects[:bcrypt][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
 end
 
 nugetpush :azure_push => [:pack] do |nuget|
     nuget.command = Commands[:nuget]
-    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:azure][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+    nuget.package = File.join(Folders[:nuget_build], "#{Projects[:azure][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
 end
 
 nugetpush :memcached_push => [:pack] do |nuget|
     nuget.command = Commands[:nuget]
-    nuget.package = File.join(Folders[:root], Folders[:nuget_build], "#{Projects[:memcached][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
+    nuget.package = File.join(Folders[:nuget_build], "#{Projects[:memcached][:id]}.#{env_buildversion}.nupkg").gsub("/","\\")
 end
