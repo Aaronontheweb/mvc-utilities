@@ -92,11 +92,56 @@ end
 # File Output
 #-----------------------
 desc "Sets the output directories according to our build environment"
-task :set_output_directories do
-	Folders[:mvcutilities_bin] = File.join(Folders[:root], Projects[:mvcutilities][:dir], 'bin', @env_buildconfigname),
-	Folders[:bcrypt_bin] = File.join(Folders[:root], Projects[:bcrypt][:dir], 'bin', @env_buildconfigname),
-	Folders[:azure_bin] = File.join(Folders[:root], Projects[:azure][:dir], 'bin', @env_buildconfigname),
+task :set_output_folders do
+	Folders[:mvcutilities_bin] = File.join(Folders[:root], Projects[:mvcutilities][:dir], 'bin', @env_buildconfigname)
+	Folders[:bcrypt_bin] = File.join(Folders[:root], Projects[:bcrypt][:dir], 'bin', @env_buildconfigname)
+	Folders[:azure_bin] = File.join(Folders[:root], Projects[:azure][:dir], 'bin', @env_buildconfigname)
 	Folders[:memcached_bin] = File.join(Folders[:root], Projects[:memcached][:dir], 'bin', @env_buildconfigname)
+end
+
+desc "Creates all of the output folders we need for ILMerge / NuGet"
+task :create_output_folders => :set_output_folders do
+	create_dir(Folders[:out])
+	create_dir(Folders[:nuget_build])
+
+	create_dir(Folders[:mvcutilities_nuspec][:root])
+	create_dir(Folders[:mvcutilities_nuspec][:lib])
+	create_dir(Folders[:mvcutilities_nuspec][:net40])
+
+	create_dir(Folders[:azure_nuspec][:root])
+	create_dir(Folders[:azure_nuspec][:lib])
+	create_dir(Folders[:azure_nuspec][:net40])
+
+	create_dir(Folders[:bcrypt_nuspec][:root])
+	create_dir(Folders[:bcrypt_nuspec][:lib])
+	create_dir(Folders[:bcrypt_nuspec][:net40])
+
+	create_dir(Folders[:memcached_nuspec][:root])
+	create_dir(Folders[:memcached_nuspec][:lib])
+	create_dir(Folders[:memcached_nuspec][:net40])
+end
+
+desc "Wipes out the build folder so we have a clean slate to work with"
+task :clean_output_folders => :set_output_folders do
+	puts "Flushing build folder..."
+	flush_dir(Folders[:out])
+end
+
+task :prep_output => [:clean_output_folders, :create_output_folders]
+task :mvcutilities_output => [:mvcutilities_static_output, :mvcutilities_net40_output]
+
+output :mvcutilities_static_output => [:prep_output] do |out|
+	out.from Folders[:root]
+	out.to Folders[:mvcutilities_nuspec][:root]
+	out.file Files[:readme]
+	out.file Files[:license]
+end
+
+output :mvcutilities_net40_output => [:prep_output] do |out|
+	out.from Folders[:mvcutilities_bin]
+	create_dir(Folders[:mvcutilities_nuspec][:lib])
+	out.to Folders[:mvcutilities_nuspec][:net40]
+	out.file Files[:mvcutilities][:bin]
 end
 
 #-----------------------

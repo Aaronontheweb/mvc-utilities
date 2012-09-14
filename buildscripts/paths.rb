@@ -9,6 +9,7 @@ Folders = {
 	:out => File.join(root_folder, "build"),
 	:nunit => File.join(root_folder, "tools", "nunit"),
 	:nuget_bin => File.join(root_folder, ".nuget"),
+	:nuget_build => File.join(root_folder, "build", "nuget"),
 
 	:mvcutilities_tests => File.join(root_folder, Projects[:mvcutilities][:test_dir]),
 	:memcached_tests => File.join(root_folder, Projects[:memcached][:test_dir]),

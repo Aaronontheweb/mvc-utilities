@@ -31,3 +31,6 @@ Download*/
 
 #NuGet
 packages/
+
+#Output
+build/
