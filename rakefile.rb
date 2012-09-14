@@ -66,11 +66,23 @@ end
 #-----------------------
 # MSBuild
 #-----------------------
-msbuild 
+msbuild :msbuild => [:assemblyinfo] do |msb|
+	msb.properties :configuration => @env_buildconfigname
+	msb.targets :Clean, :Build #Does the equivalent of a "Rebuild Solution"
+	msb.solution = File.join(Folders[:root], Files[:solution])
+end
 
 #-----------------------
 # Tests
 #-----------------------
+
+nunit :nunit_tests => [:msbuild] do |nunit|
+	nunit.command = Commands[:nunit]
+	nunit.options '/framework v4.0.30319'
+
+	nunit.assemblies "#{Folders[:mvcutilities_tests]}/bin/#{@env_buildconfigname}/#{Files[:mvcutilities][:test]}", 
+	"#{Folders[:memcached_tests]}/bin/#{@env_buildconfigname}/#{Files[:memcached][:test]}"
+end
 
 #-----------------------
 # NuSpec
