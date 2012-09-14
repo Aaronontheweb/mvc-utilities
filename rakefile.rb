@@ -88,6 +88,63 @@ end
 # NuSpec
 #-----------------------
 
+task :nuspec_all => [:mvcutilities_nuspec, :bcrypt_nuspec, :azure_nuspec, :memcached_nuspec]
+
+nuspec :mvcutilities_nuspec do |nuspec|
+	nuspec.id = Projects[:mvcutilities][:id]
+	nuspec.version = env_buildversion
+	nuspec.authors = Projects[:mvcutilities][:authors]
+	nuspec.description = Projects[:mvcutilities][:description]
+	nuspec.title = Projects[:mvcutilities][:title]
+	nuspec.language = Projects[:language]
+	nuspec.licenseUrl = Projects[:licenseUrl]
+	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:mvcutilities][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuspec.tags = "MVC ASP.NET MVC3 MVC4 Cache Hashing Encryption LowercaseRoute Routing Azure AppFabric Memcached"
+end
+
+nuspec :bcrypt_nuspec do |nuspec|
+	nuspec.id = Projects[:bcrypt][:id]
+	nuspec.version = env_buildversion
+	nuspec.authors = Projects[:bcrypt][:authors]
+	nuspec.description = Projects[:bcrypt][:description]
+	nuspec.title = Projects[:bcrypt][:title]
+	nuspec.language = Projects[:language]
+	nuspec.licenseUrl = Projects[:licenseUrl]
+	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.dependency Projects[:bcrypt][:dependencies][:bcrypt][:name], Projects[:bcrypt][:dependencies][:bcrypt][:version]
+	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:bcrypt][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuspec.tags = "MVC ASP.NET MVC3 MVC4 Hashing Encryption BCrypt Blowfish"
+end
+
+nuspec :azure_nuspec do |nuspec|
+	nuspec.id = Projects[:azure][:id]
+	nuspec.version = env_buildversion
+	nuspec.authors = Projects[:azure][:authors]
+	nuspec.description = Projects[:azure][:description]
+	nuspec.title = Projects[:azure][:title]
+	nuspec.language = Projects[:language]
+	nuspec.licenseUrl = Projects[:licenseUrl]
+	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.dependency Projects[:azure][:dependencies][:AzureCaching][:name], Projects[:azure][:dependencies][:AzureCaching][:version]
+	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:azure][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuspec.tags = "Caching Cache AppFabric AppFabricCache Memcache Azure MVC MVC4 MVC3"
+end
+
+nuspec :memcached_nuspec do |nuspec|
+	nuspec.id = Projects[:memcached][:id]
+	nuspec.version = env_buildversion
+	nuspec.authors = Projects[:memcached][:authors]
+	nuspec.description = Projects[:memcached][:description]
+	nuspec.title = Projects[:memcached][:title]
+	nuspec.language = Projects[:language]
+	nuspec.licenseUrl = Projects[:licenseUrl]
+	nuspec.projectUrl = Projects[:projectUrl]
+	nuspec.dependency Projects[:memcached][:dependencies][:enyim][:name], Projects[:memcached][:dependencies][:enyim][:version]
+	nuspec.output_file = File.join(Folders[:nuget_build], "#{Projects[:memcached][:id]}-v#{env_buildversion}(#{@env_buildconfigname}).nuspec")
+	nuspec.tags = "Caching Cache Memcache Memcached MVC MVC4 MVC3"
+end
+
 #-----------------------
 # File Output
 #-----------------------

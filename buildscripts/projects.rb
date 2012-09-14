@@ -15,7 +15,9 @@ Projects = {
 			:copyright => "Copyright Aaron Stannard 2011-2012",
 			:authors => "Aaron Stannard",
 			:company => "StannardLabs",
-			:guid => "8574f8cd-55cf-4d63-8eb4-f98396058297"
+			:guid => "8574f8cd-55cf-4d63-8eb4-f98396058297",
+			:dependencies => {
+			}
 		},
 	:bcrypt =>{
 			:id => "mvc-utilities-bcrypt",
@@ -60,7 +62,7 @@ Projects = {
 			:company => "StannardLabs",
 			:guid => "724b0477-f465-4e88-826f-888e83f59940",
 			:dependencies => {
-				:bcrypt => {
+				:enyim => {
 					:name => "EnyimMemcached",
 					:version => "2.11.0.0"
 				}
