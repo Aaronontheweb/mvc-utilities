@@ -12,6 +12,8 @@ namespace MVC.Utilities.Caching
         private static DataCache _cache;
         private static DataCacheFactory _factory;
 
+        public AppFabricCacheService() : this(new TimeSpan(0, 20, 0)){}
+
         public AppFabricCacheService(TimeSpan defaultDuration)
             : base(defaultDuration)
         {
