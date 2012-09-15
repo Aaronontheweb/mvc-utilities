@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Runtime.Caching;
 using System.Threading;
 using Microsoft.ApplicationServer.Caching;
+using System.Linq;
 
 namespace MVC.Utilities.Caching
 {
@@ -266,7 +267,8 @@ namespace MVC.Utilities.Caching
 
         public override IDictionary<string, object> Get(string[] keys)
         {
-            throw new NotImplementedException();
+            var cache = GetCache();
+            return cache.BulkGet(keys).ToDictionary(key => key.Key, value => value.Value);
         }
 
         public bool Remove(string key, string region)
