@@ -46,8 +46,8 @@ Projects = {
 			:guid => "3d5b58db-60c0-4c05-a596-26a2df183b7b",
 			:dependencies => {
 				:AzureCaching => {
-					:name => "WindowsAzure.Caching",
-					:version => "1.6.0.0"
+					:name => "Microsoft.WindowsAzure.Caching",
+					:version => "1.7.0.0"
 				}
 			}
 		},
