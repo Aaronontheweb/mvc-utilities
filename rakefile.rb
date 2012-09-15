@@ -38,7 +38,7 @@ desc "Pushes a minor release to NuGet"
 task :release_minor => [:bump_minor_version_number, :push]
 
 desc "Pushes a major release to NuGet"
-task :release_minor => [:bump_major_version_number, :push]
+task :release_major => [:bump_major_version_number, :push]
 
 #-----------------------
 # Version Management
