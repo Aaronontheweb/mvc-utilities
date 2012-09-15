@@ -12,6 +12,8 @@ namespace MVC.Utilities.Memcached
     {
         private static MemcachedClient _memcachedClient;
 
+        public MemcachedService():this(new TimeSpan(0, 20, 0)){}
+
         public MemcachedService(TimeSpan defaultDuration)
             : base(defaultDuration)
         {
