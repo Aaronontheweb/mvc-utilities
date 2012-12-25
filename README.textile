@@ -38,7 +38,7 @@ h3. Routing
 
 MVC.Utilities contains a set of helper classes designed to tackle some specific routing challenges in ASP.NET MVC, particularly where search engine optimization is concerned.
 
-h4. Lower-case Routes
+h4. Lowercase Routes
 
 Courtesy of "Nick Bernardi":http://coderjournal.com/2008/03/force-mvc-route-url-lowercase/, we have the @LowerCaseRoute@ class in MVC.Utilities.
 
